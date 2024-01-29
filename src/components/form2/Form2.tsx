@@ -1,8 +1,13 @@
 import React from 'react';
 import { FormData } from '../../components/interfaces/interface';
-import { TextField, Button, Box, FormControl, InputLabel, MenuItem } from '@mui/material';
+import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ArrowForwardIos } from '@mui/icons-material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Dayjs } from 'dayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import './Form2.css';
 
 
 
@@ -13,6 +18,7 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
     formData,
 }) => {
     const [age, setAge] = React.useState('');
+    const [value, setValue] = React.useState<Dayjs | null>(null);
 
     const handleChange = (event: SelectChangeEvent) => {
         setAge(event.target.value as string);
@@ -23,69 +29,90 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
 
     return (
     <div className='fm2-body'>
-        <h2>Additional Information</h2>
-        <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '50ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                        >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                    
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                        >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                {/* <Autocomplete
-                    id="country-select-demo"
+        <div className='fm2-left'>
+            <h1>RIGHT</h1>
+            <label>
+            Industry:
+            <select name="industry" onChange={onChange} value={formData.industry}>
+                {industries.map((industry, index) => (
+                <option key={index} value={industry}>
+                    {industry}
+                </option>
+                ))}
+            </select>
+            </label>
+            <br />
+            <label>
+            Technology Used:
+            <select
+                name="technology"
+                onChange={onChange}
+                value={formData.technology}
+                multiple
+            >
+                {technologies.map((tech, index) => (
+                <option key={index} value={tech}>
+                    {tech}
+                </option>
+                ))}
+            </select>
+            </label>
+            <br />
+            <label>
+            Founded Date:
+            <input
+                type="date"
+                name="foundedDate"
+                value={formData.foundedDate}
+                onChange={onChange}
+                required
+            />
+            </label>
+            <br />
+            <button onClick={onBack}>Back</button>
+            <button onClick={onSubmit}>Submit</button>
+        </div>
+        <div className='fm2-right'>
+            <h2>Additional Information</h2>
+            <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '50ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    >
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Industry</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={age}
+                            label="Industry"
+                            onChange={handleChange}
+                            >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <Autocomplete
+                    id="technology used"
                     multiple
-
-                    //onChange={onChange} 
-                    //value={formData.location}
                     sx={{ width: 300 }}
-                    options={countries}
+                    options={technologies}
                     autoHighlight
-                    getOptionLabel={(option) => option.label}
+                    getOptionLabel={(option) =>  option}
                     renderOption={(props, option) => (
                         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                            <img
-                                loading="lazy"
-                                width="20"
-                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                alt=""
-                            />
-                        {option.label} ({option.code}) +{option.phone}
+                        {option}
                         </Box>
                     )}
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Location in Africa (registered)"
-                            name='location'
+                            label="Technology Used"
+                            name='technology'
                             inputProps={{
                                 ...params.inputProps,
                                 autoComplete: 'new-password', // disable autocomplete and autofill
@@ -93,54 +120,35 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
                             required
                         />
                     )}
-                /> */}
-                <Button 
-                    variant="contained" 
-                    endIcon={<ArrowForwardIos />}
-                    >
-                    NEXT
-                </Button>
-            </Box>
-        <label>
-        Industry:
-        <select name="industry" onChange={onChange} value={formData.industry}>
-            {industries.map((industry, index) => (
-            <option key={index} value={industry}>
-                {industry}
-            </option>
-            ))}
-        </select>
-        </label>
-        <br />
-        <label>
-        Technology Used:
-        <select
-            name="technology"
-            onChange={onChange}
-            value={formData.technology}
-            multiple
-        >
-            {technologies.map((tech, index) => (
-            <option key={index} value={tech}>
-                {tech}
-            </option>
-            ))}
-        </select>
-        </label>
-        <br />
-        <label>
-        Founded Date:
-        <input
-            type="date"
-            name="foundedDate"
-            value={formData.foundedDate}
-            onChange={onChange}
-            required
-        />
-        </label>
-        <br />
-        <button onClick={onBack}>Back</button>
-        <button onClick={onSubmit}>Submit</button>
+                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        label="Founded Date"
+                        value={value} onChange={(newValue) => setValue(newValue)}
+                        slotProps={{
+                        textField: {
+                            helperText: 'MM/DD/YYYY',
+                        },
+                        }}
+                    />
+                </LocalizationProvider>
+                    <Stack direction="row" spacing={2}>
+                        <Button
+                            variant="outlined"
+                            startIcon={<ArrowBackIos />}
+                            >
+                            BACK
+                        </Button>
+                        <Button
+                            variant="contained"
+                            endIcon={<ArrowForwardIos />}
+                            >
+                            SUBMIT
+                        </Button>
+                    </Stack>
+                </Box>
+        </div>
+        
     </div>
     );
 };
