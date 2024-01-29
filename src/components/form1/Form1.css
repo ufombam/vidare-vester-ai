@@ -1,0 +1,17 @@
+.fm1-body {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0px;
+}
+.fm1-body .fm1-right {
+  border: 1px solid black;
+  width: 40vw;
+  height: 100vh;
+}
+.fm1-body .fm1-left {
+  border: 1px solid black;
+  width: 60vw;
+  height: 100vh;
+}/*# sourceMappingURL=form1.css.map */
