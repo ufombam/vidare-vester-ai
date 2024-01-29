@@ -1,0 +1,17 @@
+.fm2-body {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0px;
+}
+.fm2-body .fm2-right {
+  border: 1px solid black;
+  width: 40vw;
+  height: 100vh;
+}
+.fm2-body .fm2-left {
+  border: 1px solid black;
+  width: 60vw;
+  height: 100vh;
+}/*# sourceMappingURL=Form2.css.map */

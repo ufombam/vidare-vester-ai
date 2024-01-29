@@ -22,7 +22,7 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
     const technologies = ['AI/ML', 'Blockchain', 'IoT', 'Mobile', 'Web', 'Other'];
 
     return (
-    <div>
+    <div className='fm2-body'>
         <h2>Additional Information</h2>
         <Box
                 component="form"
@@ -39,22 +39,26 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
                         id="demo-simple-select"
                         value={age}
                         label="Age"
-                        onChange={{handleChange}}
+                        onChange={handleChange}
+                        >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                    
+                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={age}
+                        label="Age"
+                        onChange={handleChange}
                         >
                         <MenuItem value={10}>Ten</MenuItem>
                         <MenuItem value={20}>Twenty</MenuItem>
                         <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
                 </FormControl>
-                <TextField 
-                    id="outlined-basic" 
-                    label="Technology Used" 
-                    variant="outlined" 
-                    name="website" 
-                    onChange={onChange} 
-                    value={formData.website}
-                    required
-                />
                 {/* <Autocomplete
                     id="country-select-demo"
                     multiple
