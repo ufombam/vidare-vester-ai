@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import Footer from '../footer/Footer';
+import logo from '../../assets/logo/vester_ai.png';
 import './Form2.css';
 
 
@@ -34,7 +35,7 @@ const Form2: React.FC<{
     <div className='fm2-body'>
         <div className='fm2-main'>
             <div className='fm2-left'>
-                <div className="fm2-left_header"><img src="../../assets/logo/vester_ai.png" alt="vester_logo" /></div>
+                <div className="fm2-left_header"><img src={logo} alt="vester_logo" /></div>
                 <h1><span>AI Assessment:</span> </h1>
                 <h1>Your Path to Precision</h1>
                 <h1>and Progress! </h1>

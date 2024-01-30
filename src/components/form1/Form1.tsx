@@ -5,6 +5,7 @@ import { TextField, Autocomplete, Button, Box } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { CountryType } from '../../components/interfaces/interface';
 import Footer from '../footer/Footer';
+import logo from '../../assets/logo/vester_ai.png';
 
 
 const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; formData: FormData; locationData: (countryData: CountryType) => void }> = ({
@@ -445,7 +446,7 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
     <div className='fm1-body'>
         <div className='fm1-main'>
             <div className='fm1-left'>
-                <div className="fm1-left_header"><img src="../../assets/logo/vester_ai.png" alt="vester_logo" /></div>
+                <div className="fm1-left_header"><img src={logo} alt="vester_logo" /></div>
                 <h1>Unlock Your Potential</h1>
                 <h1>with <span>AI-Powered</span></h1>
                 <h1> Insights!</h1>
