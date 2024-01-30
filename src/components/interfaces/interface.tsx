@@ -6,3 +6,10 @@ export interface FormData {
     technology: string[];
     foundedDate: string;
 }
+
+export interface CountryType {
+    code: string;
+    label: string;
+    phone: string;
+    suggested?: boolean;
+}

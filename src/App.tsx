@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormData } from './components/interfaces/interface';
+import { FormData, CountryType } from './components/interfaces/interface';
 import Form1 from './components/form1/Form1';
 import Form2 from './components/form2/Form2';
 
@@ -8,7 +8,7 @@ const StartupForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     website: '',
-    location: '',
+    location: "",
     industry: '',
     technology: [],
     foundedDate: '',
@@ -17,12 +17,15 @@ const StartupForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log("I am changing");
   };
-  // const handleNextPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const { name, value } = e.target;
-  //   console.log(name, value)
-  // }
+
+  const handleLocation = (countryData: CountryType): void => {
+    setFormData({...formData, location: countryData.label})
+  }
+
+  const handleTech = (event: React.ChangeEvent<{}>, newValue: string[]): void => {
+    setFormData({...formData, technology: newValue})
+  }
 
   const handleTechnologyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const options = e.target.options;
@@ -51,9 +54,10 @@ const StartupForm: React.FC = () => {
   return (
     <div>
       {page === 1 ? (
-        <Form1 onNext={handleNext} onChange={handleChange} formData={formData} />
+        <Form1 onNext={handleNext} onChange={handleChange} formData={formData} locationData={handleLocation}  />
       ) : (
         <Form2
+          onTechChange={handleTech}
           onBack={handleBack}
           onSubmit={handleSubmit}
           onChange={handleChange}

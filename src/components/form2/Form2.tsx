@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -11,17 +11,19 @@ import './Form2.css';
 
 
 
-const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void; formData: FormData }> = ({
+const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void; formData: FormData; onTechChange: (event: React.ChangeEvent<{}>, newValue: string[]) => void }> = ({
     onBack,
     onSubmit,
     onChange,
     formData,
+    onTechChange
 }) => {
-    const [age, setAge] = React.useState('');
-    const [value, setValue] = React.useState<Dayjs | null>(null);
+    const [industry, setIndustry] = React.useState<string>('');
+    const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
+    const [date, setDate] = React.useState<Dayjs | null>(null);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value as string);
+        setIndustry(event.target.value as string);
     };
     const industries = ['Finance', 'Healthcare', 'Education', 'Technology', 'Other'];
 
@@ -31,46 +33,6 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
     <div className='fm2-body'>
         <div className='fm2-left'>
             <h1>RIGHT</h1>
-            <label>
-            Industry:
-            <select name="industry" onChange={onChange} value={formData.industry}>
-                {industries.map((industry, index) => (
-                <option key={index} value={industry}>
-                    {industry}
-                </option>
-                ))}
-            </select>
-            </label>
-            <br />
-            <label>
-            Technology Used:
-            <select
-                name="technology"
-                onChange={onChange}
-                value={formData.technology}
-                multiple
-            >
-                {technologies.map((tech, index) => (
-                <option key={index} value={tech}>
-                    {tech}
-                </option>
-                ))}
-            </select>
-            </label>
-            <br />
-            <label>
-            Founded Date:
-            <input
-                type="date"
-                name="foundedDate"
-                value={formData.foundedDate}
-                onChange={onChange}
-                required
-            />
-            </label>
-            <br />
-            <button onClick={onBack}>Back</button>
-            <button onClick={onSubmit}>Submit</button>
         </div>
         <div className='fm2-right'>
             <h2>Additional Information</h2>
@@ -83,27 +45,35 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
                     autoComplete="off"
                     >
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Industry</InputLabel>
+                        <InputLabel id="industry_label">Industry</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={age}
+                            labelId="industry"
+                            id="industry_tag"
+                            value={industry}
                             label="Industry"
-                            onChange={handleChange}
+                            name='industry'
+                            onChange={(event: any) => {
+                                onChange(event); 
+                                return handleChange}}
                             >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            {industries.map((industry, index) => 
+                                <MenuItem key={index} value={industry}>{industry}</MenuItem>
+                            )}
                         </Select>
                     </FormControl>
                     <Autocomplete
-                    id="technology used"
-                    multiple
-                    sx={{ width: 300 }}
-                    options={technologies}
-                    autoHighlight
-                    getOptionLabel={(option) =>  option}
-                    renderOption={(props, option) => (
+                        id="technology used"
+                        multiple
+                        sx={{ width: 300 }}
+                        options={technologies}
+                        value={selectedTechnologies}
+                        onChange={(event: any, value) => {
+                            onTechChange(event, value)
+                          return  setSelectedTechnologies(value)
+                        }}
+                        autoHighlight
+                        getOptionLabel={(option) =>  option}
+                        renderOption={(props, option) => (
                         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                         {option}
                         </Box>
@@ -124,7 +94,9 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                         label="Founded Date"
-                        value={value} onChange={(newValue) => setValue(newValue)}
+                        value={date} onChange={(newValue) => {
+                           return setDate(newValue)
+                        }}
                         slotProps={{
                         textField: {
                             helperText: 'MM/DD/YYYY',
@@ -136,17 +108,19 @@ const Form2: React.FC<{ onBack: () => void; onSubmit: () => void; onChange: (e: 
                         <Button
                             variant="outlined"
                             startIcon={<ArrowBackIos />}
+                            onClick={onBack}
                             >
                             BACK
                         </Button>
                         <Button
                             variant="contained"
                             endIcon={<ArrowForwardIos />}
+                            onClick={onSubmit}
                             >
                             SUBMIT
                         </Button>
                     </Stack>
-                </Box>
+            </Box>
         </div>
         
     </div>

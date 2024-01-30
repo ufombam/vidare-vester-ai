@@ -3,21 +3,17 @@ import { FormData } from '../../components/interfaces/interface';
 import './Form1.css';
 import { TextField, Autocomplete, Button, Box } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
+import { CountryType } from '../../components/interfaces/interface';
 
 
-const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; formData: FormData; }> = ({
+const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; formData: FormData; locationData: (countryData: CountryType) => void }> = ({
     onNext,
     onChange,
     formData,
+    locationData
 }) => {
-    const [value, setValue] = React.useState<string | null>();
-    interface CountryType {
-        code: string;
-        label: string;
-        phone: string;
-        suggested?: boolean;
-    }
-    
+    const [value, setValue] = React.useState<CountryType | null>(null);
+
     // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
     const countries: readonly CountryType[] = [
         { code: 'AD', label: 'Andorra', phone: '376' },
@@ -447,7 +443,7 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
     return (
     <div className='fm1-body'>
         <div className='fm1-left'>
-        <h2>Startup Information</h2>
+            <h2>Startup Information</h2>
             <h1>LEFT</h1>
         </div>
         <div className='fm1-right'>
@@ -479,11 +475,12 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
                     required
                 />
                 <Autocomplete
+                    value={value}
+                    onChange={(event: any, newValue: CountryType | any) => {
+                        locationData(newValue);
+                        setValue(newValue);
+                    }}
                     id="country-select-demo"
-                    multiple
-
-                    //onChange={onChange} 
-                    //value={formData.location}
                     sx={{ width: 300 }}
                     options={countries}
                     autoHighlight
