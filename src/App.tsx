@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import { FormData, CountryType } from './components/interfaces/interface';
+import { Dayjs } from 'dayjs';
 import Form1 from './components/form1/Form1';
 import Form2 from './components/form2/Form2';
+import './App.css';
 
 const StartupForm: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     website: '',
-    location: "",
+    location: {
+      code: '',
+      label: '',
+      phone: '',
+    },
     industry: '',
     technology: [],
-    foundedDate: '',
+    foundedDate: null,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
@@ -20,23 +26,16 @@ const StartupForm: React.FC = () => {
   };
 
   const handleLocation = (countryData: CountryType): void => {
-    setFormData({...formData, location: countryData.label})
+    setFormData({...formData, location: countryData})
   }
 
   const handleTech = (event: React.ChangeEvent<{}>, newValue: string[]): void => {
     setFormData({...formData, technology: newValue})
   }
 
-  const handleTechnologyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const options = e.target.options;
-    const selectedTech = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedTech.push(options[i].value);
-      }
-    }
-    setFormData({ ...formData, technology: selectedTech });
-  };
+  const handleDate = (newValue:Dayjs): void => {
+    setFormData({...formData, foundedDate: newValue})
+  }
 
   const handleNext = () => {
     setPage(2);
@@ -46,17 +45,51 @@ const StartupForm: React.FC = () => {
     setPage(1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    
     // Submit the form data
     console.log(formData);
+    fetch('https://vidare_test_endpoint.com/api/postEndpoint', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Response:', data);
+    })
+    .catch(error => {
+      setFormData({
+        name: '',
+        website: '',
+        location: {
+          code: '',
+          label: '',
+          phone: '',
+        },
+        industry: '',
+        technology: [],
+        foundedDate: null,
+      })
+      console.error('There was a problem with the POST request - Invalid endpoint');
+    });
   };
 
   return (
-    <div>
+    <div className='App'>
       {page === 1 ? (
         <Form1 onNext={handleNext} onChange={handleChange} formData={formData} locationData={handleLocation}  />
       ) : (
         <Form2
+          onDateChange={handleDate}
           onTechChange={handleTech}
           onBack={handleBack}
           onSubmit={handleSubmit}

@@ -1,0 +1,35 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    border: 1px solid red;
+    width: 100%;
+    height: fit-content;
+    background: linear-gradient(to top, rgba(255, 255, 255, ) 100%, rgba(255, 255, 255, 0) 100%);
+    ul {
+        list-style-type: none;
+        margin: 0px 0px;
+        padding: 0px;
+    }
+    &_social {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        border: 1px solid black;
+        width: 25%;
+        height: 100%;
+    }
+    &_link {
+        border: 1px solid red;
+        flex: 1;
+        height: 100%;
+    }
+    &_contact {
+        border: 1px solid black;
+        width: 25%;
+        height: 100%;
+    }
+}

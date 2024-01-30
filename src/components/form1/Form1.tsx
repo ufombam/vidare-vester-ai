@@ -4,6 +4,7 @@ import './Form1.css';
 import { TextField, Autocomplete, Button, Box } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import { CountryType } from '../../components/interfaces/interface';
+import Footer from '../footer/Footer';
 
 
 const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; formData: FormData; locationData: (countryData: CountryType) => void }> = ({
@@ -12,7 +13,7 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
     formData,
     locationData
 }) => {
-    const [value, setValue] = React.useState<CountryType | null>(null);
+    //const [value, setValue] = React.useState<CountryType | null>(null);
 
     // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
     const countries: readonly CountryType[] = [
@@ -442,82 +443,94 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
 
     return (
     <div className='fm1-body'>
-        <div className='fm1-left'>
-            <h2>Startup Information</h2>
-            <h1>LEFT</h1>
-        </div>
-        <div className='fm1-right'>
-            <h1>RIGHT</h1>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '50ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                <TextField 
-                    id="outlined-basic" 
-                    label="Startup Name" 
-                    variant="outlined" 
-                    onChange={onChange} 
-                    name="name" 
-                    value={formData.name}
-                    required
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Website" 
-                    variant="outlined" 
-                    name="website" 
-                    onChange={onChange} 
-                    value={formData.website}
-                    required
-                />
-                <Autocomplete
-                    value={value}
-                    onChange={(event: any, newValue: CountryType | any) => {
-                        locationData(newValue);
-                        setValue(newValue);
+        <div className='fm1-main'>
+            <div className='fm1-left'>
+                <div className="fm1-left_header"><img src="../../assets/logo/vester_ai.png" alt="vester_logo" /></div>
+                <h1>Unlock Your Potential</h1>
+                <h1>with <span>AI-Powered</span></h1>
+                <h1> Insights!</h1>
+                <p>"Discover the Future of Assessments with AI. Empowerment Starts Here!"</p>
+            </div>
+            <div className='fm1-right'>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '50ch' },
                     }}
-                    id="country-select-demo"
-                    sx={{ width: 300 }}
-                    options={countries}
-                    autoHighlight
-                    getOptionLabel={(option) => option.label}
-                    renderOption={(props, option) => (
-                        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                            <img
-                                loading="lazy"
-                                width="20"
-                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                alt=""
+                    noValidate
+                    autoComplete="off"
+                    >
+                    <h1 style={{width: "100%"}}>Onboarding Form</h1>
+                    <TextField
+                        id="outlined-basic"
+                        label="Startup Name"
+                        variant="outlined"
+                        onChange={onChange}
+                        name="name"
+                        value={formData.name}
+                        required
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="Website"
+                        variant="outlined"
+                        name="website"
+                        onChange={onChange}
+                        value={formData.website}
+                        required
+                    />
+                    <Autocomplete
+                        value={formData.location}
+                        onChange={(event: any, newValue: CountryType | any) => {
+                            locationData(newValue);
+                        }}
+                        id="country-select-demo"
+                        sx={{ width: 300 }}
+                        options={countries}
+                        autoHighlight
+                        getOptionLabel={(option) => option.label}
+                        isOptionEqualToValue={(option, value) => {
+                            if (option.code === value.code) {
+                                return true
+                            }
+                            return true
+                        }}
+                        renderOption={(props, option) => (
+                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                                <img
+                                    loading="lazy"
+                                    width="20"
+                                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                                    src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                                    alt=""
+                                />
+                            {option.label} ({option.code}) +{option.phone}
+                            </Box>
+                        )}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Location in Africa (registered)"
+                                name='location'
+                                inputProps={{
+                                    ...params.inputProps,
+                                    autoComplete: 'new-password', // disable autocomplete and autofill
+                                }}
+                                required
                             />
-                        {option.label} ({option.code}) +{option.phone}
-                        </Box>
-                    )}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Location in Africa (registered)"
-                            name='location'
-                            inputProps={{
-                                ...params.inputProps,
-                                autoComplete: 'new-password', // disable autocomplete and autofill
-                            }}
-                            required
-                        />
-                    )}
-                />
-                <Button 
-                    variant="contained" 
-                    endIcon={<ArrowForwardIos />}
-                    onClick={onNext}>
-                    NEXT
-                </Button>
-            </Box>
+                        )}
+                    />
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        endIcon={<ArrowForwardIos />}
+                        onClick={onNext}>
+                        NEXT
+                    </Button>
+                </Box>
+            </div>
         </div>
+        <Footer />
     </div>
     );
 };

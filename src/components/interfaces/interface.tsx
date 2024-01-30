@@ -1,10 +1,12 @@
+import { Dayjs } from 'dayjs';
+
 export interface FormData {
     name: string;
     website: string;
-    location: string;
+    location: CountryType;
     industry: string;
     technology: string[];
-    foundedDate: string;
+    foundedDate: Dayjs | null;
 }
 
 export interface CountryType {
