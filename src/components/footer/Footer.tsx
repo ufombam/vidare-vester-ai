@@ -1,17 +1,35 @@
 import React from 'react';
 import './Footer.css';
-
+import logo from '../../assets/logo/vester_ai.png';
+import { Stack, Typography } from '@mui/material';
+import { Twitter, Instagram, LinkedIn, Google, FacebookRounded, Phone, Mail } from '@mui/icons-material';
 
 const Footer: React.FC<{}> = () => {
     return (
     <div className='fm1-body'>
         <div className='footer'>
         <div className='footer_social'>
-          <div>
-            <img src="public\vester_ai.png" height={"20px"} alt="vester-logo" />
+          <div className='footer_logo'>
+            <img src={logo} height={"80px"} alt="vester-logo" />
           </div>
-          <div style={{textAlign: "justify"}}>Vester AI! AI meets assessment excellence. Elevate your journey with our intuitive platform, offering personalized insights and unparalleled accuracy. Embark on a transformative experience tailored to your success."</div>
-          <div>LOGO3</div>
+          <div style={{textAlign: "justify"}}><p>Vester AI! AI meets assessment excellence. Elevate your journey with our intuitive platform, offering personalized insights and unparalleled accuracy.</p></div>
+          <div className='footer_social_buttons'>
+            <Typography>
+              <FacebookRounded />
+            </Typography>
+            <Typography>
+              <Twitter />
+            </Typography>
+            <Typography>
+              <Instagram />
+            </Typography>
+            <Typography>
+              <LinkedIn />
+            </Typography>
+            <Typography>
+              <Google />
+            </Typography>
+          </div>
         </div>
         <div className='footer_link'>
           <h4>Company</h4>
@@ -19,6 +37,7 @@ const Footer: React.FC<{}> = () => {
             <li>About us</li>
             <li>Services</li>
             <li>Community</li>
+            <li>Testimonial</li>
           </ul>
         </div>
         <div className='footer_link'>
@@ -42,8 +61,19 @@ const Footer: React.FC<{}> = () => {
         <div className='footer_contact'>
         <h4>Contact</h4>
           <ul>
-            <li>(91) 12345 45</li>
-            <li>support@gmail.com</li>
+            <li>
+              <Stack direction={'row'}>
+                <span className="material-icons mauve">phone</span>
+                <p>(91) 12345 45</p>
+              </Stack>
+            </li>
+            <li>
+              <Stack direction={'row'}>
+                <span className="material-icons mauve">face</span>
+                <p>support@gmail.com</p>
+              </Stack>
+            </li>
+            
           </ul>
         </div>
         </div>

@@ -18,14 +18,12 @@
   margin-bottom: 5%;
 }
 .fm1-body .fm1-main .fm1-right {
-  border: 1px solid black;
   border-bottom-right-radius: 50px;
   border-top-right-radius: 50px;
   width: 40vw;
 }
 .fm1-body .fm1-main .fm1-left {
   padding-left: 5%;
-  border: 1px solid black;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   width: 60vw;
@@ -33,11 +31,10 @@
 }
 .fm1-body .fm1-main .fm1-left_header {
   position: relative;
-  bottom: 5%;
-  left: -60px;
+  left: -45px;
 }
 .fm1-body .fm1-main .fm1-left_header img {
-  height: 250px;
+  height: 100px;
 }
 .fm1-body .fm1-main .fm1-left h1 {
   font-size: 4rem;

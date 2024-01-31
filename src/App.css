@@ -4,9 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 100vh;
   background: linear-gradient(to bottom right, white, #e0b0ff);
   background-position: center;
   background-repeat: no-repeat;
