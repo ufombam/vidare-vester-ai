@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack, Collapse, Alert, IconButton } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -11,6 +11,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import Footer from '../footer/Footer';
 import logo from '../../assets/logo/vester_ai.png';
+import Typed from 'typed.js';
 import './Form2.css';
 
 
@@ -45,21 +46,39 @@ const Form2: React.FC<{
 
     const technologies = ['AI/ML', 'Blockchain', 'IoT', 'Mobile', 'Web', 'Other'];
 
+    //Determine screen width for button spacing
+    let screenWidth = window.screen.width;
+
+    //Typwriter effect configuration
+    const typeEffectEl = useRef(null);
+    React.useEffect(() => {
+        const typed = new Typed(typeEffectEl.current, {
+            strings: ['<h1><span>AI Assessment:</span> </h1><h1>Your Path to Precision</h1><h1>and Progress! </h1><p>"Welcome to Vester AI, your AI assessment ally. Elevate your journey with personalized insights tailored for success."</p>'],
+            typeSpeed: 10,
+            showCursor: false,
+            loop: false,
+            loopCount: Infinity
+        });
+    
+        return () => {
+          // Destroy Typed instance during cleanup to stop animation
+          typed.destroy();
+        };
+      }, []);
+
     return (
     <div className='fm2-body'>
         <div className='fm2-main'>
             <div className='fm2-left'>
                 <div className="fm2-left_header"><img src={logo} alt="vester_logo" /></div>
-                <h1><span>AI Assessment:</span> </h1>
-                <h1>Your Path to Precision</h1>
-                <h1>and Progress! </h1>
-                <p>"Welcome to Vester AI, your AI assessment ally. Elevate your journey with personalized insights tailored for success."</p>
+                <div ref={typeEffectEl}>
+                </div>
             </div>
             <div className='fm2-right'>
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '50ch' },
+                        '& > :not(style)': { m: 1, width: '80%' },
                     }}
                     noValidate
                     autoComplete="off"
@@ -127,7 +146,7 @@ const Form2: React.FC<{
                             }}
                         />
                     </LocalizationProvider>
-                        <Stack direction="row" spacing={35}>
+                        <Stack direction="row" spacing={screenWidth < 356 ? '0%' : screenWidth < 768 ? '20%' : screenWidth < 991 ? '30%' : '57%'}>
                             <Button
                                 variant="outlined"
                                 startIcon={<ArrowBackIos />}

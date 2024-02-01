@@ -97,7 +97,7 @@ const StartupForm: React.FC = () => {
       return response.json();
     })
     .then(data => {
-      setTimeout(() => {
+      setTimeout(() => { //simulating success on submission
         setFormData({
           name: '',
           website: '',
@@ -112,14 +112,14 @@ const StartupForm: React.FC = () => {
         })
         setLoading(false);
         console.log('Response:', data);
-        handleAlertResponse('notOkay',  true);
+        handleAlertResponse('notOkay',  true); //send 'notOkay' to demonstrate success - default ('ok')
       }, 4000);
       setTimeout(() => {
         setPage(1);
       },10000)
     })
     .catch(error => {
-      setTimeout(() => {
+      setTimeout(() => { //simulating error on submission
         setFormData({
           name: '',
           website: '',
@@ -134,7 +134,7 @@ const StartupForm: React.FC = () => {
         })
         setLoading(false);
         console.error('There was a problem with the POST request - Invalid endpoint');
-        handleAlertResponse('ok',  true);
+        handleAlertResponse('ok',  true); //send 'notOkay' to demonstrate success - default ('notOkay')
       }, 4000)
       setTimeout(() => {
         setPage(1);

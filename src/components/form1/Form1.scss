@@ -4,6 +4,8 @@
     align-items: center;
     width: 100%;
     height: fit-content;
+    text-wrap: wrap;
+    flex: 1;
     .fm1-main {
         margin-top: 2%;
         box-sizing: border-box;
@@ -38,7 +40,7 @@
                 }
             }
             h1 {
-                font-size: 4rem;
+                font-size: 4em;
                 line-height: 0.5em;
                 text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
                 span {
@@ -52,3 +54,92 @@
         }
     }    
 }
+
+
+/* Styles for screens smaller than 768 pixels (phones) */
+@media  (max-width: 768px) {
+    .fm1-body {
+        flex-direction: column;
+        .fm1-main {
+            flex-direction: column;
+            align-items: center;
+            .fm1-right {
+                width: inherit;
+                h1 {
+                    font-size: 1.5rem;
+                }
+                //height: 100%;
+            }
+            .fm1-left {
+                padding-left: 5%;
+                //border: 1px solid black;
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+                width: inherit;
+                height: 100%;
+                &_header {
+                    position: relative;
+                    left: -12%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 2.5rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }
+  
+  /* Styles for screens between 768 and 991 pixels (tablets) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .fm1-body {
+        .fm1-main {
+            .fm1-right {
+                width: inherit;
+                //height: 100%;
+            }
+            .fm1-left {
+                //border: 1px solid black;
+                &_header {
+                    position: relative;
+                    left: -8%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 2rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }
+  
+  /* Styles for screens larger than 992 pixels (desktops) */
+  @media (min-width: 992px) {
+    .fm1-body {
+        .fm1-main {
+            .fm1-right {
+                width: inherit;
+            }
+            .fm1-left {
+                //border: 1px solid black;
+                &_header {
+                    position: relative;
+                    left: -8%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 3rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }

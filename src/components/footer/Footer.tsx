@@ -59,22 +59,21 @@ const Footer: React.FC<{}> = () => {
           </ul>
         </div>
         <div className='footer_contact'>
-        <h4>Contact</h4>
-          <ul>
-            <li>
-              <Stack direction={'row'}>
-                <span className="material-icons mauve">phone</span>
-                <p>(91) 12345 45</p>
-              </Stack>
-            </li>
-            <li>
-              <Stack direction={'row'}>
-                <span className="material-icons mauve">face</span>
-                <p>support@gmail.com</p>
-              </Stack>
-            </li>
-            
-          </ul>
+          <h4>Contact</h4>
+            <ul>
+              <li>
+                <Stack direction={'row'}>
+                  <span className="material-icons mauve">phone</span>
+                  <p>(91) 12345 45</p>
+                </Stack>
+              </li>
+              <li>
+                <Stack direction={'row'}>
+                  <span className="material-icons mauve">face</span>
+                  <p>support@gmail.com</p>
+                </Stack>
+              </li>
+            </ul>
         </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useRef } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import './Form1.css';
 import { TextField, Autocomplete, Button, Box } from '@mui/material';
@@ -6,7 +6,7 @@ import { ArrowForwardIos } from '@mui/icons-material';
 import { CountryType } from '../../components/interfaces/interface';
 import Footer from '../footer/Footer';
 import logo from '../../assets/logo/vester_ai.png';
-
+import Typed from 'typed.js';
 
 const Form1: React.FC<{ 
     onNext: () => void; 
@@ -447,21 +447,36 @@ const Form1: React.FC<{
         { code: 'ZW', label: 'Zimbabwe', phone: '263' },
     ];
 
+    //Typwriter effect configuration
+    const typeEffectEl = useRef(null);
+    React.useEffect(() => {
+        const typed = new Typed(typeEffectEl.current, {
+            strings: ['<h1>Unlock Your Potential</h1> <h1>with <span>AI-Powered</span></h1><h1> Insights!</h1><p>"Discover the Future of Assessments with AI. Empowerment Starts Here!"</p>'],
+            typeSpeed: 10,
+            showCursor: false,
+            loop: false,
+            loopCount: Infinity
+        });
+    
+        return () => {
+          // Destroy Typed instance during cleanup to stop animation
+          typed.destroy();
+        };
+      }, []);
+
     return (
     <div className='fm1-body'>
         <div className='fm1-main'>
             <div className='fm1-left'>
                 <div className="fm1-left_header"><img src={logo} alt="vester_logo" /></div>
-                <h1>Unlock Your Potential</h1>
-                <h1>with <span>AI-Powered</span></h1>
-                <h1> Insights!</h1>
-                <p>"Discover the Future of Assessments with AI. Empowerment Starts Here!"</p>
+                <div ref={typeEffectEl}>
+                </div>
             </div>
             <div className='fm1-right'>
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '50ch' },
+                        '& > :not(style)': { m: 1, width: '90%' },
                     }}
                     noValidate
                     autoComplete="off"

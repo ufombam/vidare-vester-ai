@@ -37,8 +37,6 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    position: relative;
-    bottom: -18%;
     justify-content: space-between;
     //border: 1px solid red;
     width: 100%;
@@ -96,10 +94,78 @@
     &_contact {
         //border: 1px solid black;
         align-self: self-start;
+        text-align:start;
         width: 25%;
         height: 100%;
         margin-right: 10%;
-        text-align:start;
         padding-left: 5%;
     }
 }
+
+/* Styles for screens smaller than 768 pixels (phones) */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column-reverse;
+        flex-wrap: wrap;
+        //border: 1px solid red;
+        width: 100vw;
+        font-size: 12px;
+        ul {
+            list-style-type: none;
+            margin: 0px 0px;
+            padding: 0px;
+            li {
+                line-height: 2;
+                font-weight: 500;
+                cursor: pointer;
+                p {
+                    margin: 0px;
+                    margin-left: 5px;
+                }
+            }
+        }
+        &_social {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            //border: 1px solid black;
+            width: 90%;
+            height: 100%;
+            margin-left: 0%;
+            padding-right: 2%;
+            .footer_logo {
+                align-self: flex-start;
+                margin-top: 15px;
+            }
+            &_buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                justify-items: center;
+                //border: 1px solid black;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                cursor: pointer;
+            }
+        }
+        &_link {
+            align-self: center;
+            //border: 1px solid red;
+            height: 100%;
+            width: 70%;
+            text-align: center;
+            padding-left: 5%;
+        }
+        &_contact {
+            //border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            align-self: center;
+            text-align:center;
+            margin-right: 0%;
+            padding-left: 0%;
+        }
+    }
+  }

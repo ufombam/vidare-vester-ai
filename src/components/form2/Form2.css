@@ -48,4 +48,73 @@
 .fm2-body .fm2-main .fm2-left p {
   color: #6e6e75;
   font-size: 1.1rem;
+}
+
+/* Styles for screens smaller than 768 pixels (phones) */
+@media (max-width: 768px) {
+  .fm2-body {
+    flex-direction: column;
+  }
+  .fm2-body .fm2-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .fm2-body .fm2-main .fm2-right {
+    width: inherit;
+  }
+  .fm2-body .fm2-main .fm2-right h1 {
+    font-size: 1.5rem;
+  }
+  .fm2-body .fm2-main .fm2-left {
+    padding-left: 5%;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    width: inherit;
+    height: 100%;
+  }
+  .fm2-body .fm2-main .fm2-left_header {
+    position: relative;
+    left: -12%;
+  }
+  .fm2-body .fm2-main .fm2-left_header img {
+    height: 80px;
+  }
+  .fm2-body .fm2-main .fm2-left h1 {
+    font-size: 2.5rem;
+    line-height: 1em;
+  }
+}
+/* Styles for screens between 768 and 991 pixels (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .fm2-body .fm2-main .fm2-right {
+    width: inherit;
+  }
+  .fm2-body .fm2-main .fm2-left_header {
+    position: relative;
+    left: -8%;
+  }
+  .fm2-body .fm2-main .fm2-left_header img {
+    height: 80px;
+  }
+  .fm2-body .fm2-main .fm2-left h1 {
+    font-size: 2rem;
+    line-height: 1em;
+  }
+}
+/* Styles for screens larger than 992 pixels (desktops) */
+@media (min-width: 992px) {
+  .fm2-body .fm2-main .fm2-right {
+    width: inherit;
+  }
+  .fm2-body .fm2-main .fm2-left_header {
+    position: relative;
+    left: -8%;
+  }
+  .fm2-body .fm2-main .fm2-left_header img {
+    height: 80px;
+  }
+  .fm2-body .fm2-main .fm2-left h1 {
+    font-size: 3rem;
+    line-height: 1em;
+  }
 }/*# sourceMappingURL=Form2.css.map */

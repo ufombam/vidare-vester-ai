@@ -53,3 +53,91 @@
         }
     }
 }
+
+/* Styles for screens smaller than 768 pixels (phones) */
+@media  (max-width: 768px) {
+    .fm2-body {
+        flex-direction: column;
+        .fm2-main {
+            flex-direction: column;
+            align-items: center;
+            .fm2-right {
+                width: inherit;
+                h1 {
+                    font-size: 1.5rem;
+                }
+                //height: 100%;
+            }
+            .fm2-left {
+                padding-left: 5%;
+                //border: 1px solid black;
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+                width: inherit;
+                height: 100%;
+                &_header {
+                    position: relative;
+                    left: -12%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 2.5rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }
+  
+  /* Styles for screens between 768 and 991 pixels (tablets) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .fm2-body {
+        .fm2-main {
+            .fm2-right {
+                width: inherit;
+                //height: 100%;
+            }
+            .fm2-left {
+                //border: 1px solid black;
+                &_header {
+                    position: relative;
+                    left: -8%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 2rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }
+  
+  /* Styles for screens larger than 992 pixels (desktops) */
+  @media (min-width: 992px) {
+    .fm2-body {
+        .fm2-main {
+            .fm2-right {
+                width: inherit;
+            }
+            .fm2-left {
+                //border: 1px solid black;
+                &_header {
+                    position: relative;
+                    left: -8%;
+                    img {
+                        height: 80px;
+                    }
+                }
+                h1 {
+                    font-size: 3rem;
+                    line-height: 1em;
+                }
+            }
+        }    
+    }
+  }
