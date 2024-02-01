@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack, Collapse, Alert, IconButton } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -42,12 +42,28 @@ const Form2: React.FC<{
     alertResponse,
     closeAlert
 }) => {
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+
     const industries = ['Finance', 'Healthcare', 'Education', 'Technology', 'Other'];
 
     const technologies = ['AI/ML', 'Blockchain', 'IoT', 'Mobile', 'Web', 'Other'];
 
     //Determine screen width for button spacing
-    let screenWidth = window.screen.width;
+    useEffect(() => {
+        const screenRes = (): void => {
+            setScreenWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', screenRes);
+
+        // Cleanup function to remove event listener when component unmounts
+        return () => {
+            window.removeEventListener('resize', screenRes);
+        }
+
+    },[])
+
+    console.log(screenWidth);
 
     //Typwriter effect configuration
     const typeEffectEl = useRef(null);
@@ -78,7 +94,7 @@ const Form2: React.FC<{
                 <Box
                     component="form"
                     sx={{
-                        '& > :not(style)': { m: 1, width: '80%' },
+                        '& > :not(style)': { m: 1, width: '90%' },
                     }}
                     noValidate
                     autoComplete="off"
@@ -146,7 +162,14 @@ const Form2: React.FC<{
                             }}
                         />
                     </LocalizationProvider>
-                        <Stack direction="row" spacing={screenWidth < 356 ? '0%' : screenWidth < 768 ? '20%' : screenWidth < 991 ? '30%' : '57%'}>
+                        <Stack 
+                        direction="row" 
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
+                        }}
+                        >
                             <Button
                                 variant="outlined"
                                 startIcon={<ArrowBackIos />}

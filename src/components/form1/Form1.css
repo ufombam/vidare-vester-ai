@@ -9,7 +9,6 @@
   flex: 1;
 }
 .fm1-body .fm1-main {
-  margin-top: 2%;
   box-sizing: border-box;
   padding: 0px;
   background: linear-gradient(to top right, white 0%, #f5e0ff 25%, #f1f3f6 50%, #fff2e6 100%);
@@ -17,6 +16,7 @@
   flex-direction: row;
   width: 80%;
   border-radius: 50px;
+  margin-top: 2%;
   margin-bottom: 5%;
   box-shadow: -2px 1px 4px rgba(0, 0, 0, 0.3);
 }
@@ -60,6 +60,10 @@
   .fm1-body .fm1-main {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    border-radius: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .fm1-body .fm1-main .fm1-right {
     width: inherit;
@@ -76,7 +80,7 @@
   }
   .fm1-body .fm1-main .fm1-left_header {
     position: relative;
-    left: -12%;
+    left: 0%;
   }
   .fm1-body .fm1-main .fm1-left_header img {
     height: 80px;
