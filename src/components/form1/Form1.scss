@@ -68,7 +68,7 @@
             margin-top: 0;
             margin-bottom: 0;
             .fm1-right {
-                //width: inherit;
+                width: auto;
                 h1 {
                     font-size: 1.5rem;
                 }
@@ -79,7 +79,7 @@
                 //border: 1px solid black;
                 border-top-left-radius: 50px;
                 border-bottom-left-radius: 50px;
-                //width: 100vw;
+                width: auto;
                 height: 100%;
                 &_header {
                     position: relative;

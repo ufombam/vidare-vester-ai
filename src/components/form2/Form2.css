@@ -63,6 +63,9 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+  .fm2-body .fm2-main .fm2-right {
+    width: auto;
+  }
   .fm2-body .fm2-main .fm2-right h1 {
     font-size: 1.5rem;
   }
@@ -70,6 +73,7 @@
     padding-left: 5%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+    width: auto;
     height: 100%;
   }
   .fm2-body .fm2-main .fm2-left_header {

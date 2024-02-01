@@ -65,6 +65,9 @@
     margin-top: 0;
     margin-bottom: 0;
   }
+  .fm1-body .fm1-main .fm1-right {
+    width: auto;
+  }
   .fm1-body .fm1-main .fm1-right h1 {
     font-size: 1.5rem;
   }
@@ -72,6 +75,7 @@
     padding-left: 5%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+    width: auto;
     height: 100%;
   }
   .fm1-body .fm1-main .fm1-left_header {
