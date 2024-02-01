@@ -63,12 +63,12 @@
         .fm1-main {
             flex-direction: column;
             align-items: center;
-            width: 100%;
+            width: 100vw;
             border-radius: 0px;
             margin-top: 0;
             margin-bottom: 0;
             .fm1-right {
-                width: inherit;
+                //width: inherit;
                 h1 {
                     font-size: 1.5rem;
                 }
@@ -79,7 +79,7 @@
                 //border: 1px solid black;
                 border-top-left-radius: 50px;
                 border-bottom-left-radius: 50px;
-                width: inherit;
+                //width: 100vw;
                 height: 100%;
                 &_header {
                     position: relative;

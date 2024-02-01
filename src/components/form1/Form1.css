@@ -60,13 +60,10 @@
   .fm1-body .fm1-main {
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     border-radius: 0px;
     margin-top: 0;
     margin-bottom: 0;
-  }
-  .fm1-body .fm1-main .fm1-right {
-    width: inherit;
   }
   .fm1-body .fm1-main .fm1-right h1 {
     font-size: 1.5rem;
@@ -75,7 +72,6 @@
     padding-left: 5%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
-    width: inherit;
     height: 100%;
   }
   .fm1-body .fm1-main .fm1-left_header {

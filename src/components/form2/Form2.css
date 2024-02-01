@@ -58,13 +58,10 @@
   .fm2-body .fm2-main {
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 100VW;
     border-radius: 0px;
     margin-top: 0;
     margin-bottom: 0;
-  }
-  .fm2-body .fm2-main .fm2-right {
-    width: inherit;
   }
   .fm2-body .fm2-main .fm2-right h1 {
     font-size: 1.5rem;
@@ -73,7 +70,6 @@
     padding-left: 5%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
-    width: inherit;
     height: 100%;
   }
   .fm2-body .fm2-main .fm2-left_header {
