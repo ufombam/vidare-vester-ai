@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.css';
 import logo from '../../assets/logo/vester_ai.png';
 import { Stack, Typography } from '@mui/material';
-import { Twitter, Instagram, LinkedIn, Google, FacebookRounded, Phone, Mail } from '@mui/icons-material';
+import { Twitter, Instagram, LinkedIn, Google, FacebookRounded } from '@mui/icons-material';
 
 const Footer: React.FC<{}> = () => {
     return (
@@ -12,7 +12,7 @@ const Footer: React.FC<{}> = () => {
           <div className='footer_logo'>
             <img src={logo} height={"80px"} alt="vester-logo" />
           </div>
-          <div style={{textAlign: "justify"}}><p>Vester AI! AI meets assessment excellence. Elevate your journey with our intuitive platform, offering personalized insights and unparalleled accuracy.</p></div>
+          <div><p>Vester AI! AI meets assessment excellence. Elevate your journey with our intuitive platform, offering personalized insights and unparalleled accuracy.</p></div>
           <div className='footer_social_buttons'>
             <Typography>
               <FacebookRounded />

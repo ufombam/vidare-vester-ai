@@ -1,12 +1,14 @@
 import React from 'react';
 import { FormData } from '../../components/interfaces/interface';
-import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack } from '@mui/material';
+import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack, Collapse, Alert, IconButton } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Select from '@mui/material/Select';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
 import Footer from '../footer/Footer';
 import logo from '../../assets/logo/vester_ai.png';
 import './Form2.css';
@@ -19,13 +21,25 @@ const Form2: React.FC<{
         formData: FormData; 
         onTechChange: (event: React.ChangeEvent<{}>, newValue: string[]) => void;
         onDateChange: (newValue: string | any) => void;
+        formState: boolean;
+        loading: boolean,
+        onSubmitClick: () => void;
+        sendAlert: boolean;
+        alertResponse: string;
+        closeAlert: (res: string,  state: boolean) => void;
     }> = ({
     onBack,
     onSubmit,
     onChange,
     formData,
     onTechChange,
-    onDateChange
+    onDateChange,
+    formState,
+    loading,
+    onSubmitClick,
+    sendAlert,
+    alertResponse,
+    closeAlert
 }) => {
     const industries = ['Finance', 'Healthcare', 'Education', 'Technology', 'Other'];
 
@@ -100,9 +114,10 @@ const Form2: React.FC<{
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Founded Date"
-                            value={formData.foundedDate} onChange={(newValue) => {
+                            value={formData.foundedDate} 
+                            onChange={(newValue) => {
                                 const myDate = (newValue?.toDate().toLocaleDateString().split('/').join('-'));
-                              return  onDateChange(dayjs(myDate));
+                                return  onDateChange(dayjs(myDate));
             
                             }}
                             slotProps={{
@@ -112,7 +127,7 @@ const Form2: React.FC<{
                             }}
                         />
                     </LocalizationProvider>
-                        <Stack direction="row" spacing={2}>
+                        <Stack direction="row" spacing={35}>
                             <Button
                                 variant="outlined"
                                 startIcon={<ArrowBackIos />}
@@ -121,16 +136,66 @@ const Form2: React.FC<{
                                 >
                                 BACK
                             </Button>
-                            <Button
-                                type='submit'
-                                variant="contained"
+                            <LoadingButton
+                                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                                    onSubmitClick()
+                                    return onSubmit(event)
+                                }}
                                 endIcon={<ArrowForwardIos />}
-                                onClick={onSubmit}
+                                loading={loading}
+                                loadingPosition="end"
+                                variant="contained" 
+                                disabled={formState ? true : false}
                                 color="secondary"
-                                >
-                                SUBMIT
-                            </Button>
+                            >
+                                <span>SUBMIT</span>
+                            </LoadingButton>
                         </Stack>
+                        {
+                        alertResponse === 'ok' ? 
+                        <Collapse in={sendAlert}>
+                            <Alert
+                                action={
+                                    <IconButton
+                                      aria-label="close"
+                                      color="inherit"
+                                      size="small"
+                                      onClick={() => {
+                                        closeAlert('', false);
+                                      }}
+                                    >
+                                      <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                  }
+                                severity="success"
+                                sx={{ mb: 2 }}
+                                >
+                                Your Information has been received!
+                            </Alert>
+                        </Collapse> :
+                        alertResponse === 'notOkay' ?
+                        <Collapse in={sendAlert}>
+                            <Alert
+                                action={
+                                    <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        closeAlert('', false);
+                                    }}
+                                    >
+                                    <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                                severity="warning"
+                                sx={{ mb: 2 }}
+                                >
+                                Oops! That didn't work
+                            </Alert>
+                        </Collapse> :
+                        <div></div>
+                        }
                 </Box>
             </div>
         </div>

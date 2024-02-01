@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormData, CountryType } from './components/interfaces/interface';
 import { Dayjs } from 'dayjs';
 import Form1 from './components/form1/Form1';
@@ -7,6 +7,10 @@ import './App.css';
 
 const StartupForm: React.FC = () => {
   const [page, setPage] = useState<number>(1);
+  const [formNotComplete, setFormNotComplete] = useState<boolean>(true);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [alert, setAlert] = useState<boolean>(false);
+  const [response, setResponse] = useState<string>('');
   const [formData, setFormData] = useState<FormData>({
     name: '',
     website: '',
@@ -23,19 +27,50 @@ const StartupForm: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    checkFormData();
   };
 
-  const handleLocation = (countryData: CountryType): void => {
-    setFormData({...formData, location: countryData})
-  }
+  const handleClick = (): void =>  {
+    setLoading(true);
+}
+
+  const handleLocation = (countryData: CountryType | null): void => {
+    checkFormData();
+    setFormData({...formData, location: countryData});
+  };
 
   const handleTech = (event: React.ChangeEvent<{}>, newValue: string[]): void => {
-    setFormData({...formData, technology: newValue})
+    setFormData({...formData, technology: newValue});
+    checkFormData();
+  };
+
+  const handleDate = (newValue: Dayjs): void => {
+    setFormData({...formData, foundedDate: newValue});
+    checkFormData();
+  };
+
+  const handleAlertResponse = (res: string,  state: boolean): void => {
+    setAlert(true);
+    setResponse(res)
   }
 
-  const handleDate = (newValue:Dayjs): void => {
-    setFormData({...formData, foundedDate: newValue})
-  }
+  useEffect(() => {
+    checkFormData();
+    // eslint-disable-next-line
+  }, [formData]);
+
+  const checkFormData = (): void => {
+    if (formData.foundedDate &&
+        formData.industry &&
+        formData.location &&
+        formData.name &&
+        formData.technology[0] &&
+        formData.website) {
+          setFormNotComplete(false)
+        } else {
+          setFormNotComplete(true)
+        }
+  };
 
   const handleNext = () => {
     setPage(2);
@@ -47,9 +82,7 @@ const StartupForm: React.FC = () => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    
     // Submit the form data
-    console.log(formData);
     fetch('https://vidare_test_endpoint.com/api/postEndpoint', {
       method: 'POST',
       headers: {
@@ -64,22 +97,48 @@ const StartupForm: React.FC = () => {
       return response.json();
     })
     .then(data => {
-      console.log('Response:', data);
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          website: '',
+          location: {
+            code: '',
+            label: '',
+            phone: '',
+          },
+          industry: '',
+          technology: [],
+          foundedDate: null,
+        })
+        setLoading(false);
+        console.log('Response:', data);
+        handleAlertResponse('notOkay',  true);
+      }, 4000);
+      setTimeout(() => {
+        setPage(1);
+      },10000)
     })
     .catch(error => {
-      setFormData({
-        name: '',
-        website: '',
-        location: {
-          code: '',
-          label: '',
-          phone: '',
-        },
-        industry: '',
-        technology: [],
-        foundedDate: null,
-      })
-      console.error('There was a problem with the POST request - Invalid endpoint');
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          website: '',
+          location: {
+            code: '',
+            label: '',
+            phone: '',
+          },
+          industry: '',
+          technology: [],
+          foundedDate: null,
+        })
+        setLoading(false);
+        console.error('There was a problem with the POST request - Invalid endpoint');
+        handleAlertResponse('ok',  true);
+      }, 4000)
+      setTimeout(() => {
+        setPage(1);
+      },10000)
     });
   };
 
@@ -95,6 +154,12 @@ const StartupForm: React.FC = () => {
           onSubmit={handleSubmit}
           onChange={handleChange}
           formData={formData}
+          formState={formNotComplete}
+          loading={loading}
+          onSubmitClick={handleClick}
+          sendAlert={alert}
+          alertResponse={response}
+          closeAlert={handleAlertResponse}
         />
       )}
     </div>

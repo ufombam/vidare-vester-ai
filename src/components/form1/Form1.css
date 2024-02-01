@@ -16,6 +16,7 @@
   width: 80%;
   border-radius: 50px;
   margin-bottom: 5%;
+  box-shadow: -2px 1px 4px rgba(0, 0, 0, 0.3);
 }
 .fm1-body .fm1-main .fm1-right {
   border-bottom-right-radius: 50px;

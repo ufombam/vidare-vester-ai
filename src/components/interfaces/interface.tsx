@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 export interface FormData {
     name: string;
     website: string;
-    location: CountryType;
+    location: CountryType | null;
     industry: string;
     technology: string[];
     foundedDate: Dayjs | null;

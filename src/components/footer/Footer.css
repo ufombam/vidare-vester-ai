@@ -35,8 +35,8 @@
   flex-direction: row;
   align-items: center;
   text-align: center;
-  position: fixed;
-  bottom: 0%;
+  position: relative;
+  bottom: -18%;
   justify-content: space-between;
   width: 100%;
   height: -moz-fit-content;

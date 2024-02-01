@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import './Form1.css';
 import { TextField, Autocomplete, Button, Box } from '@mui/material';
@@ -8,7 +8,12 @@ import Footer from '../footer/Footer';
 import logo from '../../assets/logo/vester_ai.png';
 
 
-const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; formData: FormData; locationData: (countryData: CountryType) => void }> = ({
+const Form1: React.FC<{ 
+    onNext: () => void; 
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    formData: FormData; 
+    locationData: (countryData: CountryType | null) => void 
+}> = ({
     onNext,
     onChange,
     formData,
@@ -469,6 +474,7 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
                         onChange={onChange}
                         name="name"
                         value={formData.name}
+                        helperText={"Vester AI"}
                         required
                     />
                     <TextField
@@ -478,13 +484,13 @@ const Form1: React.FC<{ onNext: () => void; onChange: (e: React.ChangeEvent<HTML
                         name="website"
                         onChange={onChange}
                         value={formData.website}
+                        helperText={"www.vesterai.com"}
                         required
                     />
                     <Autocomplete
                         value={formData.location}
-                        onChange={(event: any, newValue: CountryType | any) => {
-                            locationData(newValue);
-                        }}
+                        onChange={(event: SyntheticEvent<Element, Event>, value: CountryType | null) => {
+                            locationData(value)}}
                         id="country-select-demo"
                         sx={{ width: 300 }}
                         options={countries}
