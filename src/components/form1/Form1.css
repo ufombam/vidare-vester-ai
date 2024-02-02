@@ -43,6 +43,7 @@
   font-size: 4em;
   line-height: 0.5em;
   text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
 .fm1-body .fm1-main .fm1-left h1 span {
   color: #a248cc;
@@ -77,6 +78,7 @@
     border-bottom-left-radius: 50px;
     width: auto;
     height: 100%;
+    text-wrap: wrap;
   }
   .fm1-body .fm1-main .fm1-left_header {
     position: relative;
@@ -87,7 +89,8 @@
   }
   .fm1-body .fm1-main .fm1-left h1 {
     font-size: 2.5rem;
-    line-height: 1em;
+    line-height: 1.2em;
+    margin: 0;
   }
 }
 /* Styles for screens between 768 and 991 pixels (tablets) */
