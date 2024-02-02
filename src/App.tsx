@@ -16,8 +16,7 @@ const StartupForm: React.FC = () => {
     website: '',
     location: {
       code: '',
-      label: '',
-      phone: '',
+      label: ''
     },
     industry: '',
     technology: [],
@@ -104,7 +103,6 @@ const StartupForm: React.FC = () => {
           location: {
             code: '',
             label: '',
-            phone: '',
           },
           industry: '',
           technology: [],
@@ -126,7 +124,6 @@ const StartupForm: React.FC = () => {
           location: {
             code: '',
             label: '',
-            phone: '',
           },
           industry: '',
           technology: [],

@@ -63,8 +63,6 @@ const Form2: React.FC<{
 
     },[])
 
-    console.log(screenWidth);
-
     //Typwriter effect configuration
     const typeEffectEl = useRef(null);
     React.useEffect(() => {
