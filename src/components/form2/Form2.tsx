@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { FormData } from '../../components/interfaces/interface';
 import { Button, Box, FormControl, InputLabel, MenuItem, TextField, Autocomplete, Stack, Collapse, Alert, IconButton } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
+import { LoadingButton } from '@mui/lab';
 import Select from '@mui/material/Select';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -13,6 +13,7 @@ import Footer from '../footer/Footer';
 import logo from '../../assets/logo/vester_ai.png';
 import Typed from 'typed.js';
 import './Form2.css';
+
 
 
 const Form2: React.FC<{ 
@@ -42,26 +43,10 @@ const Form2: React.FC<{
     alertResponse,
     closeAlert
 }) => {
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
 
     const industries = ['Finance', 'Healthcare', 'Education', 'Technology', 'Other'];
 
     const technologies = ['AI/ML', 'Blockchain', 'IoT', 'Mobile', 'Web', 'Other'];
-
-    //Determine screen width for button spacing
-    useEffect(() => {
-        const screenRes = (): void => {
-            setScreenWidth(window.innerWidth);
-        }
-        window.addEventListener('resize', screenRes);
-
-        // Cleanup function to remove event listener when component unmounts
-        return () => {
-            window.removeEventListener('resize', screenRes);
-        }
-
-    },[])
 
     //Typwriter effect configuration
     const typeEffectEl = useRef(null);
@@ -147,8 +132,9 @@ const Form2: React.FC<{
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Founded Date"
+                            maxDate={dayjs(new Date())}
                             value={formData.foundedDate} 
-                            onChange={(newValue) => {
+                            onChange={(newValue: any) => {
                                 const myDate = (newValue?.toDate().toLocaleDateString().split('/').join('-'));
                                 return  onDateChange(dayjs(myDate));
             

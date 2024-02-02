@@ -5,6 +5,8 @@ import Form1 from './components/form1/Form1';
 import Form2 from './components/form2/Form2';
 import './App.css';
 
+
+
 const StartupForm: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [formNotComplete, setFormNotComplete] = useState<boolean>(true);
